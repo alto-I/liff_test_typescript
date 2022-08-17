@@ -1,0 +1,2 @@
+# liff_test_typescript
+TypeScript版liffテストアプリ
