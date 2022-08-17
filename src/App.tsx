@@ -4,15 +4,6 @@ import { useForm, SubmitHandler } from 'react-hook-form';
 import liff from '@line/liff';
 import { getCsrfToken } from "./getCsrfToken";
 
-type reviewTarget = {
-  id: string;
-  name: string;
-};
-
-type Props = {
-  reviewTargets: Array<reviewTarget>;
-  userId: string
-};
 
 type Inputs = {
   product: string;
@@ -22,7 +13,7 @@ type Inputs = {
   description: string;
 };
 
-const LineForm = ({ reviewTargets, userId }: Props) => {
+const LineForm = () => {
   const {
     register,
     handleSubmit,
@@ -34,7 +25,6 @@ const LineForm = ({ reviewTargets, userId }: Props) => {
       '/line/reviews',
       {
         review: {
-          user_id: userId,
           review_target_id: data.product,
           total_score: data.totalScore,
           nickname: data.nickname,
