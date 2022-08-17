@@ -22,11 +22,16 @@ const LineForm = () => {
   } = useForm<Inputs>();
 
   useEffect(() => {
+    liff.init({
+      liffId: "1657368836-47LwyBZa"
+    })
+    .then(() => {
       liff.getProfile()
       .then((profile) => {
         alert(profile.userId)
         setUserId(profile.userId)
       })
+    })
   })
 
   const saveReview = (data: Inputs) => {
