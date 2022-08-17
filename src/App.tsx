@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React from 'react';
+import React,{ useState, useEffect } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import liff from '@line/liff';
 import { getCsrfToken } from "./getCsrfToken";
@@ -14,11 +14,24 @@ type Inputs = {
 };
 
 const LineForm = () => {
+  const [userId, setUserId] = useState("")
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<Inputs>();
+
+  useEffect(() => {
+    liff.init({
+      liffId: "1657368836-AbbZpjl9"
+    })
+    .then(() => {
+      liff.getProfile()
+      .then((profile) => {
+        setUserId(profile.userId)
+      })
+    })
+  })
 
   const saveReview = (data: Inputs) => {
     axios.post(
@@ -44,7 +57,8 @@ const LineForm = () => {
 
   return (
     <>
-      liff_version: {liff.getVersion()}
+      <p>liff_version: {liff.getVersion()}</p>
+      <p>user_id:{userId}</p>
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className='mb-8px'>
           <label>
