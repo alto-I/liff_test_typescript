@@ -28,6 +28,7 @@ const LineForm = () => {
     .then(() => {
       liff.getProfile()
       .then((profile) => {
+        alert(profile.userId)
         setUserId(profile.userId)
       })
     })
